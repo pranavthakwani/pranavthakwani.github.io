@@ -1,2 +1,0 @@
-# registrationform
-sample registration form
