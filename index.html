@@ -1,295 +1,138 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>form validation</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-      crossorigin="anonymous"
-    />
-
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
-      integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
-      crossorigin="anonymous"
-    ></script>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registeration Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <style>
-      * {
-        font-weight: bolder;
-      }
-      body {
-        margin-top: 100px;
-      }
-      th,
-      td {
-        border: 2px solid white;
-      }
+        body{
+            background-color: rgb(0, 0, 0);
+        }
+        #form{
+            border: 2px solid rgb(165, 0, 241);
+            border-radius: 15px;
+            width: 50%;
+            /*padding: 3rem 1rem;*/
+            background-image: linear-gradient(45deg, rgb(157, 0, 255), rgb(101, 0, 110));
+            margin: 8% auto;
+            max-width: 600px;
+        }
+        form{
+            display: flex;
+            flex-direction: column;
+            margin: 3rem 5rem;
+        }
+        input{
+            margin: 1rem;
+            padding: 0.5rem 1.5rem;
+            border-radius: 10px;
+        }
+        button{
+            margin: 2rem 1rem;
+            padding: 0.5rem 1.5rem;
+            border-radius: 10px;
+            background-image: linear-gradient(360deg, rgb(189, 25, 25), rgb(235, 0, 0));
+            color: rgb(255, 255, 255);
+        }
+        h1{
+            color: whitesmoke;
+            background-image: linear-gradient(45deg, rgb(229, 255, 0), rgb(0, 225, 255));
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 15px;
+        }
+        .cust{
+            background-color: whitesmoke;
+            max-width: 800px;
+            border-radius: 15px;
+            margin: 2rem auto;
+        }
+        button:hover:enabled{
+            transform: scale3d(1.05,1.05,1.05);
+            transition-duration: 0.3s;
+        }
+        button:disabled{
+            opacity: 0.5;
+        }
     </style>
-  </head>
-
-  <body class="bg-dark text-light">
-    <div class="container-fluid mx-auto row">
-      <form onsubmit="validate()" name="myForm">
-        <div class="form-group col-md-6 mx-auto">
-          <label for="name">Enter Name:</label>
-          <input
-            type=""
-            class="form-control"
-            id="name"
-            placeholder="Enter name"
-            required
-          />
-        </div>
-        <br /><br />
-        <div class="form-group col-md-6 mx-auto">
-          <label for="email">Email address:</label>
-          <input
-            type="email"
-            class="form-control"
-            id="email"
-            aria-decribedby="emailHelp"
-            placeholder="Enter email"
-            required
-          />
-        </div>
-        <br /><br />
-        <div class="form-group col-md-6 mx-auto">
-          <label for="Password">Password:</label>
-          <input
-            type="password"
-            class="form-control"
-            id="password"
-            placeholder="Enter Password"
-            required
-          />
-        </div>
-        <br /><br />
-        <div class="form-group col-md-6 mx-auto">
-          <label for="dob">Enter DOB:</label>
-          <input
-            type="date"
-            class="form-control"
-            id="dob"
-            min="18 years ago"
-            max="55 years ago"
-            required
-          />
-        </div>
-        <br /><br />
-        <div class="form-check mx-auto col-md-6">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            id="checkbox"
-            required
-          />
-          <label class="form-check-label" for="Check"
-            >accept all terms and condition</label
-          >
-          <br /><br />
-          <button
-            type="submit"
-            class="btn btn-success"
-            onclick="validate(event)"
-          >
-            Submit
-          </button>
-          <div id="errorMessage"></div>
-        </div>
-      </form>
-      <table
-        id="registrationTable"
-        style="
-          margin: 0 auto;
-          display: table;
-          border: 2px solid rgb(255, 255, 255);
-          text-align: center;
-          width: 60%;
-          margin-top: 20px;
-          margin-bottom: 50px;
-        "
-      >
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Password</th>
-            <th>Dob</th>
-            <th>Accepted terms?</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
     <script>
-
-     // Get data from local storage
-    let userData = JSON.parse(localStorage.getItem("user"));
-
-    // Check if the data exists and is an array
-    if (userData && Array.isArray(userData)) {
-    // Get the table element
-    let table = document.getElementById("registrationTable");
-
-    // Loop through the userData array
-    for (let i = 0; i < userData.length; i++) {
-    // Create a new row
-    let row = table.insertRow();
-
-    // Insert cells for the name, dob, email, and password
-    let nameCell = row.insertCell(0);
-    let emailCell = row.insertCell(1);
-    let passwordCell = row.insertCell(2);
-    let dobCell = row.insertCell(3);
-    let t_and_cCell = row.insertCell(4);
-
-    // Set the cell values
-    nameCell.innerHTML = userData[i].name;
-    emailCell.innerHTML = userData[i].email;
-    passwordCell.innerHTML = userData[i].password;
-    dobCell.innerHTML = userData[i].dob;
-    t_and_cCell.innerHTML = userData[i].checkbox;
-    console.log("erroe")
-  }}
-    // } else {
-    //   console.error("No data found in local storage or data is not in expected format");
-    // }
-
-    function validate(event) {
-        event.preventDefault();
-
-        // birthdate calculation
-        let dob = document.getElementById("dob").value;
-        const name = document.forms["myForm"]["name"].value;
-        const email = document.forms["myForm"]["email"].value;
-        const password = document.forms["myForm"]["password"].value;
-        const errorMessage = document.getElementById("errorMessage");
-        const table = document.querySelector("#registrationTable tbody");
-        const checkbox = document.getElementById("checkbox");
-        
-
-
-      //   const checkAge=()=> {
-      //   var birthdate = document.getElementById("dob").value;
-      //   var birthdateArray = birthdate.split("-");
-      //   var today = new Date();
-      //   var birthdateObject = new Date(birthdateArray[0], birthdateArray[1] - 1, birthdateArray[2]);
-      //   var ageInMilliseconds = today - birthdateObject;
-      //   var ageInYears = ageInMilliseconds / (1000 * 60 * 60 * 24 * 365);
-  
-      //   if (ageInYears >= 18 && ageInYears <= 55) {
-          
-      //   } else {
-      //     alert("You are not within the age range of 18 to 55 years old.");
-      //   }
-      // }
-
-
-
-        const calculateAge = (dob) => {
-          const today = new Date();
-          const birthDate = new Date(dob);
-          let age = today.getFullYear() - birthDate.getFullYear();
-          const monthDiff = today.getMonth() - birthDate.getMonth();
-          if (
-            monthDiff < 0 ||
-            (monthDiff === 0 && today.getDate() < birthDate.getDate())
-          ) {
-            age--;
-          }
-          return age;
-        };
-
-        const age = calculateAge(dob);
-        console.log(age);
-
-        const validateEmail = (email) => {
-          var re =
-            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-          return re.test(String(email).toLowerCase());
-        };
-        if (validateEmail(email)) {
-          emailis = "valid";
-        } else {
-          emailis = "wrong";
+        let check = () => {
+            let sub = document.getElementById("submit")
+            sub.disabled = !(sub.disabled)
         }
+        let store = (event) => {
+            var dob = new Date(document.getElementById("dob").value)
+            var curr = new Date()
+            var age = (curr.getFullYear() - dob.getFullYear())
+            if(curr.getMonth() - dob.getMonth() === 0){
+                if(curr.getDate() - dob.getDate() < 0)
+                    age--
+            }
+            else if(curr.getMonth() - dob.getMonth() < 0)
+                age--
 
-        errorMessage.innerHTML = "";
-
-        let isValid = true;
-
-        if (!name) {
-          alert("Name is required.");
-          isValid = false;
+            if(isNaN(age) || age<18 || age>55){
+                alert("Age must be between 18 and 55!")
+                event.preventDefault()
+            }
+            let toStore = JSON.parse(localStorage.getItem("user")) || []
+            toStore.push({
+                name: document.getElementById("name").value,
+                email: document.getElementById("email").value,
+                password: document.getElementById("password").value,
+                dob: document.getElementById("dob").value,
+                terms: document.getElementById("agree").checked
+            })
+            localStorage.setItem("user", JSON.stringify(toStore))
         }
-
-       
-
-
-        if (isNaN(age) || age < 18 || age > 55) {
-          alert("age must between 18 to 55");
-          isValid = false;
-        }
-
-        if (emailis === "wrong") {
-          alert("please enter valid email");
-          isValid = false;
-        }
-
-        if (!password) {
-          alert("Password is required. <br>");
-          isValid = false;
-        }
-
-        if (checkbox.checked) {
-          checkbox_status="accepted terms"
-        } else {
-          checkbox_status="not accepted terms"
-        }
-
-        if (isValid) {
-          console.log("yes");
-
-          // Get the current data from local storage
-          let data = JSON.parse(localStorage.getItem("user")) || [];
-
-          // Add the new user data to the array
-          data.push({
-            name: name,
-            email: email,
-            password: password,
-            dob: dob,
-            Accepted_terms:checkbox_status,
-            // Add any other relevant data here
-          });
-
-          // Store the updated data back in local storage
-          localStorage.setItem("user", JSON.stringify(data));
-
-
-
-        
-          const row = document.createElement("tr");
-          row.innerHTML = `
-          <td>${name}</td>
-          <td>${email}</td>
-          <td>${password}</td>
-          <td>${dob}</td>
-          <td>${checkbox_status}</td>
-          `;
-          table.appendChild(row);
-
-          document.getElementById("dob").value = "";
-          document.forms["myForm"]["name"].value = "";
-          document.forms["myForm"]["email"].value = "";
-          document.forms["myForm"]["password"].value = "";
-        }
-      }
     </script>
-  </body>
+</head>
+<body>
+    <div id="form">
+        <h1>Registration Form</h1>
+        <form onsubmit="store(event)">
+            <input type="text" name="name" id="name" placeholder="Username" required>
+            <input type="email" name="email" id="email" placeholder="Email Address" required>
+            <input type="password" name="password" id="password" placeholder="Password" required>
+            <input type="date" name="dob" id="dob" required>
+            <label for="agree" style="color: white;"><input type="checkbox" name="agree" id="agree">I Agree to all the <strong>Terms and Conditions</strong>.</label>
+            <button type="submit" id="submit">SUBMIT</button>
+        </form>
+    </div>
+    <table class="table table-hover cust">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Dob</th>
+                <th>Accepted Terms?</th>
+            </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+    </table>
+    <script>
+        let rows = JSON.parse(localStorage.getItem("user"))
+        let container = document.getElementById("rows")
+        rows.forEach(user => {
+            let inner_container = document.createElement("tr")
+            let name = document.createElement("td")
+            name.innerText = user.name
+            let email = document.createElement("td")
+            email.innerText = user.email
+            let password = document.createElement("td")
+            password.innerText = user.password
+            let dob = document.createElement("td")
+            dob.innerText = user.dob
+            let terms = document.createElement("td")
+            terms.innerText = user.terms
+            inner_container.append(name, email, password, dob, terms)
+            container.appendChild(inner_container)
+        });
+    </script>
+</body>
 </html>
